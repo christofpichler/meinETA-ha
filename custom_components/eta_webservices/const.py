@@ -18,6 +18,7 @@ CHOSEN_WRITABLE_SENSORS = "chosen_writable_sensors"
 
 FORCE_LEGACY_MODE = "force_legacy_mode"
 ENABLE_DEBUG_LOGGING = "enable_debug_logging"
+AUTO_SELECT_ALL_ENTITIES = "auto_select_all_entities"
 
 OPTIONS_UPDATE_SENSOR_VALUES = "update_sensor_values"
 OPTIONS_ENUMERATE_NEW_ENDPOINTS = "enumerate_new_endpoints"
@@ -27,30 +28,38 @@ ADVANCED_OPTIONS_IGNORE_DECIMAL_PLACES_RESTRICTION = (
 
 ERROR_UPDATE_COORDINATOR = "error_update_coordinator"
 WRITABLE_UPDATE_COORDINATOR = "writable_update_coordinator"
+SENSOR_UPDATE_COORDINATOR = "sensor_update_coordinator"
 
 CUSTOM_UNIT_MINUTES_SINCE_MIDNIGHT = "minutes_since_midnight"
 CUSTOM_UNIT_TIMESLOT = "timeslot"
 CUSTOM_UNIT_TIMESLOT_PLUS_TEMPERATURE = "timeslot_plus_temperature"
+CUSTOM_UNIT_UNITLESS = "unitless"
 CUSTOM_UNITS = [
     CUSTOM_UNIT_MINUTES_SINCE_MIDNIGHT,
     CUSTOM_UNIT_TIMESLOT,
     CUSTOM_UNIT_TIMESLOT_PLUS_TEMPERATURE,
+    CUSTOM_UNIT_UNITLESS,
 ]
 
 # Supported features for ETA entities
 # We have to use pre-defined events here because otherwise the services wouldn't show up in the UI
-SUPPORT_WRITE_TIMESLOT = calendar.CalendarEntityFeature.CREATE_EVENT
-SUPPORT_WRITE_TIMESLOT_WITH_TEMPERATURE = calendar.CalendarEntityFeature.DELETE_EVENT
+SUPPORT_WRITE_TIMESLOT = calendar.const.CalendarEntityFeature.CREATE_EVENT
+SUPPORT_WRITE_TIMESLOT_WITH_TEMPERATURE = calendar.const.CalendarEntityFeature.DELETE_EVENT
 
+# Internal units which should not be shown to the user
 INVISIBLE_UNITS = [
     CUSTOM_UNIT_MINUTES_SINCE_MIDNIGHT,
     CUSTOM_UNIT_TIMESLOT,
     CUSTOM_UNIT_TIMESLOT_PLUS_TEMPERATURE,
+    CUSTOM_UNIT_UNITLESS,
 ]
 
 # Defaults
 DEFAULT_NAME = DOMAIN
 REQUEST_TIMEOUT = 60
+DEFAULT_MAX_PARALLEL_REQUESTS = 5
+MAX_PARALLEL_REQUESTS = "max_parallel_requests"
+REQUEST_SEMAPHORE = "request_semaphore"
 
 STARTUP_MESSAGE = f"""
 -------------------------------------------------------------------

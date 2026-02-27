@@ -21,10 +21,11 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity_platform import async_get_current_platform
 from homeassistant.helpers.typing import VolDictType
 
-from .api import EtaAPI, ETAEndpoint, ETAValidWritableValues
+from .api import ETAEndpoint, ETAValidWritableValues
 from .const import (
     ADVANCED_OPTIONS_IGNORE_DECIMAL_PLACES_RESTRICTION,
     CHOSEN_WRITABLE_SENSORS,
+    CUSTOM_UNIT_UNITLESS,
     DOMAIN,
     INVISIBLE_UNITS,
     WRITABLE_DICT,
@@ -32,6 +33,7 @@ from .const import (
 )
 from .coordinator import ETAWritableUpdateCoordinator
 from .entity import EtaWritableSensorEntity
+from .utils import get_native_unit
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -61,6 +63,8 @@ async def async_setup_entry(
         for entity in chosen_writable_sensors
         if config[WRITABLE_DICT][entity]["unit"]
         not in INVISIBLE_UNITS  # exclude all endpoints with a custom unit (e.g. time endpoints)
+        or config[WRITABLE_DICT][entity]["unit"]
+        == CUSTOM_UNIT_UNITLESS  # except unitless endpoints
     ]
     async_add_entities(sensors, update_before_add=True)
 
@@ -93,9 +97,7 @@ class EtaWritableNumberSensor(NumberEntity, EtaWritableSensorEntity):
         self._attr_device_class = self.determine_device_class(endpoint_info["unit"])
         self.valid_values: ETAValidWritableValues = endpoint_info["valid_values"]  # pyright: ignore[reportAttributeAccessIssue]
 
-        self._attr_native_unit_of_measurement = endpoint_info["unit"]
-        if self._attr_native_unit_of_measurement == "":
-            self._attr_native_unit_of_measurement = None
+        self._attr_native_unit_of_measurement = get_native_unit(endpoint_info["unit"])
 
         self._attr_entity_category = EntityCategory.CONFIG
 
@@ -137,7 +139,7 @@ class EtaWritableNumberSensor(NumberEntity, EtaWritableSensorEntity):
                     f"Temperature value out of bounds for entity {self.entity_id}"
                 )
 
-        eta_client = EtaAPI(self.session, self.host, self.port)
+        eta_client = self._create_eta_client()
         success = await eta_client.write_endpoint(self.uri, raw_value)
         if not success:
             raise HomeAssistantError(
