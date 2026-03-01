@@ -1,4 +1,4 @@
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://hacs.xyz)
 
 # ETA Integration for Home Assistant
 
@@ -6,7 +6,7 @@ Integration of ETA (Heating) sensors and switches to Home Assistant
 
 This integration uses the [ETA REST API](https://www.meineta.at/javax.faces.resource/downloads/ETA-RESTful-v1.2.pdf.xhtml?ln=default&v=0) to get sensor values and set switch states from the ETA pellets heating unit.
 
-This is a fork of [nigl's repo](https://github.com/nigl/homeassistant_eta_integration) with the following changes:
+This repository continues the ETA Home Assistant integration originally based on [nigl's repo](https://github.com/nigl/homeassistant_eta_integration), with additional improvements from later community work and ongoing maintenance in this repository.
 
 -   Friendly sensor names
 -   Shows the current values for all sensors during configuration
@@ -33,7 +33,7 @@ This is a fork of [nigl's repo](https://github.com/nigl/homeassistant_eta_integr
 This integration can be configured directly in Home Assistant via HACS:
 
 1. Go to `HACS` -> `Integrations` -> Click on the three dots in the top right corner --> Click on `Userdefined repositories`
-1. Insert `https://github.com/Tidone/homeassistant_eta_integration` into the field `Repository`
+1. Insert `https://github.com/christofpichler/meinETA-ha` into the field `Repository`
 1. Choose `Integration` in the dropdown field `Category`.
 1. Click on the `Add` button.
 1. Then search for the new added `ETA` integration, click on it and the click on the button `Download` on the bottom right corner
@@ -174,7 +174,7 @@ The authors cannot be made responsible if the user renders their ETA heating uni
 
 ## Custom Services
 
-THis integration provides some custom services. More information can be found on the [wiki](https://github.com/Tidone/homeassistant_eta_integration/wiki/Custom-Services).
+THis integration provides some custom services. More information can be found on the [wiki](https://github.com/christofpichler/meinETA-ha/wiki/Custom-Services).
 
 ## Integrating the ETA Unit into the Energy Dashboard
 
@@ -207,9 +207,13 @@ You can then add your ETA heating unit to your Energy Dashboard by adding this n
 
 ## Future Development
 
-If you have some ideas about expansions to this implementation, please open an issue and I may look into it.
+If you have ideas for improvements, please open an issue in this repository and include enough technical detail to reproduce the problem or evaluate the proposal.
 
 ## Tests
 
 You can run the unit tests by executing `python3 -m pytest tests/ -v` in the root directory of the project.\
 Make sure to install the requirements before: `pip3 install -r requirements_test.txt`.
+
+## Contributing
+
+Bug reports, feature requests, and pull requests are welcome. For local development and contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
