@@ -4,7 +4,7 @@ from homeassistant.components import calendar
 
 NAME = "eta_webservices"
 DOMAIN = "eta_webservices"
-ISSUE_URL = "https://github.com/Tidone/homeassistant_eta_integration/issues"
+ISSUE_URL = "https://github.com/christofpichler/meinETA-ha/issues"
 
 
 FLOAT_DICT = "FLOAT_DICT"
