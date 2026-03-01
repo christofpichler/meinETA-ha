@@ -6,7 +6,7 @@ Integration of ETA (Heating) sensors and switches to Home Assistant
 
 This integration uses the [ETA REST API](https://www.meineta.at/javax.faces.resource/downloads/ETA-RESTful-v1.2.pdf.xhtml?ln=default&v=0) to get sensor values and set switch states from the ETA pellets heating unit.
 
-This repository continues the ETA Home Assistant integration originally based on [nigl's repo](https://github.com/nigl/homeassistant_eta_integration), with additional improvements from later community work and ongoing maintenance in this repository.
+This repository continues the ETA Home Assistant integration based on work from [Tidone's repository](https://github.com/Tidone/homeassistant_eta_integration), with ongoing maintenance in this repository.
 
 -   Friendly sensor names
 -   Shows the current values for all sensors during configuration
